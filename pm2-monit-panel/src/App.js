@@ -1,25 +1,41 @@
-import logo from './logo.svg';
 import './App.css';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+const pm2 = require('pm2')
+const fs = require('fs')
 
 function App() {
+  let processList = connectPM2()
+  console.log(processList)
   return (
+    
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Container fluid>
+        <Row>
+          <Col>
+            <p>test 1</p>
+          </Col>
+          <Col>
+            <p>test 2</p>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
+}
+
+function connectPM2() {
+  let retList;
+  pm2.connect(errCallback);
+  pm2.list((err, list) => {
+    retList = list;
+  })
+  return retList
+}
+
+function errCallback(err) {
+  console.log(err)
 }
 
 export default App;
